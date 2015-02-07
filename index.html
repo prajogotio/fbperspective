@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href='http://fonts.googleapis.com/css?family=Exo+2:100' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="index.css">
+	<script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDknvQoDAZdxotOd1ngjzJxNu5WhqPENGk">
+    </script>
+	<script src="route.js"></script>
+	<script src="fbperspective.js"></script>
+</head>
+<body>
+	<div id="header">
+		<div id="header-button">Start your Tour</div>
+	</div>
+	<div id="container">
+		<div id="bg-video-container">
+			<video id="bg-video" muted loop>
+				<source src="index-res/index-bg-video.mp4" type="video/mp4">
+			</video>
+		</div>
+		<div id="control">
+			<div class="title">Perspective</div>
+			<div class="subtitle">Every place has stories worth sharing.</div>
+			<div id="start-button">See our Story</div>
+		</div>
+	</div>
+	<div id="loading-filter">
+		<div id="loading-animation">
+			<div id="loading-text">Perspective</div>
+			<div id="loading-subtext">loading . . .</div>
+		</div>
+	</div>
+</body>
+
+<script>
+	var home = document.getElementById('container');
+	var bg_video = document.getElementById('bg-video');
+	bg_video.play();
+
+	var start_button = document.getElementById('start-button');
+	start_button.onmouseover = function() {
+		setStyle(start_button, {
+			'border': '2px solid yellow',
+			'background-color': 'yellow',
+			'color' : 'black',
+		});
+	}
+	start_button.onmouseleave = function() {
+		setStyle(start_button, {
+			'border': '1px solid white',
+			'background-color': '',
+			'color' : 'white',
+		});
+	}
+
+	var header_button = document.getElementById('header-button');
+	header_button.onmouseover = function() {
+		setStyle(header_button, {
+			'border': '2px solid yellow',
+			'background-color': 'yellow',
+			'color' : 'black',
+		});
+	}
+	header_button.onmouseleave = function() {
+		setStyle(header_button, {
+			'border': '1px solid white',
+			'background-color': '',
+			'color' : 'white',
+		});
+	}
+
+	header_button.onclick = function() {
+		startPerspectiveTour();
+	}
+
+	start_button.onclick = function() {
+		startPerspectiveTour();
+	}
+
+	var perspectiveManager;
+	var perspectiveManagerDOM;
+	function startPerspectiveTour() {
+		//change
+		perspectiveManager = new PerspectiveManager(route, route['test_sphere']);
+		perspectiveManagerDOM = document.getElementById('perspective-service');
+		setTimeout(function() {
+			setStyle(home, {
+				'opacity': 0,
+			});
+			setStyle(perspectiveManagerDOM, {
+				'top' : '0',
+			})
+			setTimeout(function() {
+				setStyle(home, {
+					'display' : 'none',
+				});
+				bg_video.pause();
+			}, 700);
+		}, 300);
+	}
+</script>
+</html>
