@@ -63,15 +63,56 @@ function Perspective(panoid, _heading, _pitch) {
 
 
 Perspective.prototype.initializePerspective = function(panoid, _heading, _pitch) {
+	var that = this;
 	this.container = document.createElement('div');
 	this.display = document.createElement('div');
 	this.googleMap = document.createElement('div');
 	this.container.appendChild(this.display);
 	this.container.appendChild(this.googleMap);
+	this.backbutton = document.createElement('div');
+	this.backbuttonIcon = new Image();
+	this.backbuttonIcon.src = "res/back_button.png";
+	setStyle(this.backbuttonIcon, {
+		'width' : '100%',
+	});
+	setStyle(this.backbutton, {
+		'width' : '50px',
+		'height' : '50px',
+		'border-radius' : '50px',
+		'cursor' : 'pointer',
+		'position' : 'absolute',
+		'top' : '30px',
+		'left' : '70px',
+		'z-index': '2',
+	})
+
+	this.display.appendChild(this.backbutton);
+	this.backbutton.appendChild(this.backbuttonIcon);
+	this.backbutton.addEventListener('mouseover', function(e){
+		setStyle(this, {
+			'background-color' : 'red',
+		})
+	});
+
+	this.backbutton.addEventListener('mouseleave', function(e){
+		setStyle(this, {
+			'background-color' : 'transparent',
+		})
+	});
+	this.backbutton.addEventListener('click', function(e) {
+		setStyle(that.container, {
+			'top' : '100%',
+		})
+		setStyle(home, {
+			'opacity' : '1',
+		})
+		that.ambientSound.pause();
+		bg_video.play();
+	});
+
 	this.headSpeed = 0;
 	this.pitchSpeed = 0;
 	this.inertialSpeed = 0.95;
-
 	setStyle(this.container, {
 		'width': '100%',
 		'height': '100%',
@@ -84,6 +125,7 @@ Perspective.prototype.initializePerspective = function(panoid, _heading, _pitch)
 		'height' : '100%',
 		'z-index' : '2',
 	});
+
 
 	setStyle(this.googleMap, {
 		'z-index' : '1',

@@ -16,7 +16,7 @@
 </head>
 <body>
 	<div id="header">
-		<div id="header-button">Start your Tour</div>
+		<div id="header-button">Start the Tour</div>
 		<div id="header-random-tour"><div id="header-random-tour-text">Generate Tour</div><input type="text" id="place-search-query"></div>
 	</div>
 	<div id="container">
@@ -131,7 +131,10 @@
 	var perspectiveManagerDOM;
 	function startPerspectiveTour() {
 		//change
-		perspectiveManager = new PerspectiveManager(route, route[route['initial_sphere']]);
+		if(perspectiveManager == null) perspectiveManager = new PerspectiveManager(route, route[route['initial_sphere']]);
+		else {
+			perspectiveManager.requestNodeTransition(route['initial_sphere']);
+		}
 		perspectiveManagerDOM = document.getElementById('perspective-service');
 		setTimeout(function() {
 			setStyle(home, {
@@ -141,9 +144,6 @@
 				'top' : '0',
 			})
 			setTimeout(function() {
-				setStyle(home, {
-					'display' : 'none',
-				});
 				bg_video.pause();
 			}, 700);
 		}, 300);
