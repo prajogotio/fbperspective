@@ -511,7 +511,8 @@ VideoContent.prototype.handleEvent = function(e) {
 function ArticleContent(imgSource, title, body) {
 	this.height = 440;
 	this.width = 380;
-	this.sideLength = 70;
+	this.sideLength = 45;
+	this.baseLength = 240;
 	this.container = document.createElement('div');
 	this.img = new Image();
 	this.img.src = imgSource;
@@ -543,43 +544,32 @@ function ArticleContent(imgSource, title, body) {
 
 	this.imgDiv.appendChild(this.img);
 
-	this.thumbnailDiv.innerHTML = this.title.slice(0, 15) + (this.title.length > 15 ? "..." : "");
+	this.thumbnailDiv.innerHTML = this.title;
 
-	setStyle(this.titleText, {
-		'font-family' : 'Dosis',
-		'font-size' : '1.8em',
-		'text-align' : 'center',
-		'position' : 'absolute',
-		'width' : '100%',
-		'top' : '47%',
-		'color' : 'white',
-	});
-
-	setStyle(this.bodyText, {
-		'font-family' : 'Dosis',
-		'font-size' : '1.1em',
-		'color' : 'white',
-		'padding' : '20px',
-	});
 
 	setStyle(this.container, {
 		'overflow' : 'hidden',
-		'width' : this.sideLength+'px',
+		'width' : this.baseLength+'px',
 		'height' : this.sideLength+'px',
-		'background-color' : '#FF5934',
-		'border-radius' : '10px',
+		'border' : '1px solid white',
+		'background-color' : 'rgba(255,255,255,0.25)',
 	});
 
 	setStyle(this.thumbnailDiv, {
 		'position': 'absolute',
 		'top' : '0',
-		'font-size' : '1em',
+		'font-size' : '1.2em',
 		'color' : 'white',
-		'font-family' : 'Open Sans Condensed',
+		'font-family' : 'Lato',
 		'text-align' : 'center',
+		'top' : '50%',
+		'padding' : '6px 10px 6px 10px',
 		'padding' : '5px',
 		'opacity' : '1',
+		'width' : '100%',
 	});
+
+	setTransform(this.thumbnailDiv, 'translateY(-50%)');
 
 	setStyle(this.imgDiv, {
 		'opacity' : '0',
@@ -613,6 +603,23 @@ function ArticleContent(imgSource, title, body) {
 		'background-color' : 'rgba(202, 171, 85, 0.8)',
 		'height' : '70%',
 		'width' : '100%',
+	});
+
+	setStyle(this.titleText, {
+		'font-family' : 'Dosis',
+		'font-size' : '1.8em',
+		'text-align' : 'center',
+		'position' : 'absolute',
+		'width' : '100%',
+		'top' : '47%',
+		'color' : 'white',
+	});
+
+	setStyle(this.bodyText, {
+		'font-family' : 'Dosis',
+		'font-size' : '1.1em',
+		'color' : 'white',
+		'padding' : '20px',
 	});
 
 	setTransition(this.thumbnailDiv, 'opacity 0.5s');
@@ -650,7 +657,7 @@ ArticleContent.prototype.handleEvent = function(e) {
 			'opacity' : '0',
 		});
 		setStyle(this.container, {
-			'width' : this.sideLength + 'px',
+			'width' : this.baseLength + 'px',
 			'height' : this.sideLength + 'px',
 		});
 		setStyle(this.contentDiv, {
