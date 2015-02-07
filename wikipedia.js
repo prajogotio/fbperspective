@@ -22,10 +22,32 @@ function getWikiArticlesTitled(titles) {
     document.body.appendChild(s);    
 }
 
+function getRelevantWikiTitles(keyword) {
+    var baseUrl = "http://en.wikipedia.org/w/api.php";
+    var queryParams = {
+        'format' : 'json',
+        'action' : 'opensearch',
+        'search' : keyword,
+        'limit' : '5',
+        'suggest' : 'true',
+        'format' : 'json',
+        'callback' : 'processTitles'
+    };
+
+    var s = document.createElement('script');
+    s.src = constructUrl(baseUrl, queryParams);
+    document.body.appendChild(s);
+}
+
+function processTitles(data) {
+    console.log(data);
+    var titles = data[1];
+    getRelevantWikiTitles(titles);
+}
+
 
 function wikipediaCallback(data) {
     var div = document.getElementById("wiki");
-    console.log(data);
     
     for (var pageId in data.query.pages) {
         var page = data.query.pages[pageId];
