@@ -7,12 +7,15 @@
 	<script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDknvQoDAZdxotOd1ngjzJxNu5WhqPENGk">
     </script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 	<script src="route.js"></script>
 	<script src="fbperspective.js"></script>
+	<script src="tour_generator.js"></script>
 </head>
 <body>
 	<div id="header">
 		<div id="header-button">Start your Tour</div>
+		<div id="header-random-tour"><div id="header-random-tour-text">Generate Tour</div><input type="text" id="place-search-query"></div>
 	</div>
 	<div id="container">
 		<div id="bg-video-container">
@@ -71,12 +74,55 @@
 		});
 	}
 
+	var random_generator = document.getElementById('header-random-tour');
+	var random_generator_clicked = false;
+	random_generator.onmouseover = function() {
+		if(random_generator_clicked) return;
+		setStyle(random_generator, {
+			'border': '2px solid yellow',
+			'background-color': 'yellow',
+			'color' : 'black',
+		});
+	}
+	random_generator.onmouseleave = function() {
+		setStyle(random_generator, {
+			'border': '1px solid white',
+			'background-color': '',
+			'color' : 'white',
+		});
+	}
+
 	header_button.onclick = function() {
 		startPerspectiveTour();
 	}
 
 	start_button.onclick = function() {
 		startPerspectiveTour();
+	}
+	var random_generator_text = document.getElementById('header-random-tour-text');
+	var random_generator_input = document.getElementById('place-search-query');
+	random_generator.onclick = function() {
+		random_generator_clicked = true;
+		setStyle(random_generator, {
+			'z-index' : 3,
+		});
+		setTimeout(function(){
+			setStyle(random_generator_input, {
+				'opacity' : 1,
+			});
+			setStyle(random_generator_text, {
+				'opacity' : 0,
+			})
+			setStyle(random_generator, {
+				'background-color' : 'transparent',
+			})
+		}, 50);
+	}
+
+	random_generator_input.onkeypress = function(e) {
+		if(e.which == 13) {
+			tourGenerator(random_generator_input.value, route);
+		}
 	}
 
 	var perspectiveManager;

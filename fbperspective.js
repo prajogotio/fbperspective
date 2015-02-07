@@ -784,6 +784,7 @@ PerspectiveManager.prototype.constructFromSphere = function(sphere) {
 	this.perspective.setTitle(sphere['title']);
 	this.perspectiveLoop = setInterval(function() {
 		that.perspective.update();
+		that.perspective.photoSphere.setVisible(true);
 	}, 1000/60);
 }
 

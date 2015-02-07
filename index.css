@@ -65,6 +65,46 @@ html, body {
 	cursor: pointer;
 }
 
+#header-random-tour {
+	position: absolute;
+	font-size: 1.4em;
+	color:white;
+	font-family: "Exo 2";
+	left : 300px;
+	top: 14px;
+	border:1px solid white;
+	padding: 8px 58px 8px 58px;
+	transition: border 0.5s, background-color 0.5s;
+	-webkit-transition: border 0.5s, background-color 0.5s;
+	-moz-transition: border 0.5s, background-color 0.5s;
+}
+
+#header-random-tour-text {
+	z-index: 2;
+}
+
+#place-search-query {
+	position : absolute;
+	top : 0;
+	border: none;
+	background-color: transparent;
+	width: 90%;
+	height: 90%;
+	font-size: 1em;
+	color: white;
+	left: 0;
+	right: 0;
+	margin: auto;
+	font-family: "Exo 2";
+	opacity: 0;
+	z-index: 1;
+	cursor: pointer;
+}
+
+input[type=text]:focus {
+	outline: none;
+}
+
 .title {
 	position:absolute;
 	top: 50%;
