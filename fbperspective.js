@@ -181,7 +181,7 @@ Perspective.prototype.setAmbientSound = function(audioSource) {
 		that.playAmbientSound();
 	});
 	audio.src = audioSource;
-	audio.volume = 0.1;
+	audio.volume = 0.2;
 }
 
 Perspective.prototype.playAmbientSound = function() {
@@ -359,8 +359,7 @@ PersonCommentContent.prototype.initializePersonCommentContent = function() {
 		'width' : this.width+'px',
 		'height' : this.height/2+'px',
 		'top' : this.thRadius+this.height/2+'px',
-		'padding' : '20px 0px 20px 0px',
-		'font-size' : '0.9em',
+		'font-size' : '1.1em',
 		'color' : 'white',
 		'background-color' : 'rgb(202, 171, 85)',
 		'font-family' : 'Lato',
@@ -374,7 +373,6 @@ PersonCommentContent.prototype.initializePersonCommentContent = function() {
 		'position' : 'absolute',
 		'width' : '100%',
 		'top' : '50%',
-		'padding' : '0px 3px 0px 3px',
 		'text-align' : 'center',
 	});
 	setTransform(this.commentDiv, 'translateY(-50%)');
@@ -552,7 +550,7 @@ function ArticleContent(imgSource, title, body) {
 		'width' : this.baseLength+'px',
 		'height' : this.sideLength+'px',
 		'border' : '1px solid white',
-		'background-color' : 'rgba(255,255,255,0.25)',
+		'background-color' : 'rgba(0,0,0,0.35)',
 	});
 
 	setStyle(this.thumbnailDiv, {
@@ -669,46 +667,80 @@ ArticleContent.prototype.handleEvent = function(e) {
 
 
 function TransitNode(sphereID, title, parent) {
+	this.width = 180;
+	this.height = 120;
+	this.title = title;
 	this.parent = parent;
 	this.radius = 80;
 	this.nextSphereID = sphereID;
 	this.container = document.createElement('div');
 	setStyle(this.container, {
+		'width': this.width+'px',
+		'height' : this.height+'px',
+	})
+
+	this.iconContainer = document.createElement('div');
+	setStyle(this.iconContainer, {
+		'position' : 'absolute',
 		'border-radius' : this.radius + 'px',
 		'width' : this.radius + 'px',
 		'height' : this.radius + 'px',
+		'left' : this.width/2 - this.radius/2 + 'px',
 		'font-family' : 'Open Sans Condensed',
 		'font-size' : '1.1em',
 		'text-align' : 'center',
-		'background-color' : 'yellow',
 		'color' : 'black',
-		'padding' : '10px',
+		'padding' : '5px',
 		'cursor' : 'pointer',
 	})
-	setTransition(this.container, 'border 0.3s');
-	this.container.innerHTML = 'GO TO: ' + title;
+	setTransition(this.iconContainer, 'border 0.3s');
 
+	this.compassImg = new Image();
+	this.compassImg.src = 'res/compass.png';
+
+	setStyle(this.compassImg, {
+		'width' : '100%',
+	})
+
+	this.iconContainer.appendChild(this.compassImg);
+
+
+	this.highlightText = document.createElement('div');
+	this.highlightText.innerHTML = this.title;
+	setStyle(this.highlightText, {
+		'position' : 'absolute',
+		'top' : this.radius+'px',
+		'left' : this.width/2+'px',
+		'text-align' : 'center',
+		'width' : this.width+'px',
+		'font-family' : 'Lato',
+		'color' : 'white',
+	});
+	setTransform(this.highlightText, 'translateX(-50%)');
+	this.container.appendChild(this.iconContainer);
+	this.container.appendChild(this.highlightText);
 	this.container.addEventListener('mouseover', this, false);
 	this.container.addEventListener('click', this, false);
 	this.container.addEventListener('mouseleave', this, false);
+
 }
 
 TransitNode.prototype.handleEvent = function(e) {
 	var that = this;
 	if(e.type == 'mouseover') {
-		setStyle(this.container, {
-			'border' : '2px solid red',
+		setStyle(this.iconContainer, {
+			'border' : '2px solid yellow',
 		})
 	}
 	if(e.type == 'mouseleave') {
-		setStyle(this.container, {
+		setStyle(this.iconContainer, {
 			'border' : '',
 		})
 	}
 	if(e.type == 'click') {
-		setStyle(this.container, {
-			'border' : '2px solid green',
-			'background-color' : 'black',
+		setStyle(this.iconContainer, {
+			'border' : '2px solid black',
+			'background-color' : 'yellow',
 			'color' : 'white',
 		})
 		setTimeout(function() {
