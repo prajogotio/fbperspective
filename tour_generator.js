@@ -57,7 +57,7 @@ function tourGenerator(address, routeToBePopulated) {
 			for(var j=0;j<2;++j){
 				sphere[i].info.push({
 					type : 'article',
-					heading : Math.random() * (j+1) * -30,
+					heading : (j + 1) * -30,
 					pitch : Math.random() * 10,
 					img : 'res/photos/bgimg.jpg',
 					title : 'Information',
