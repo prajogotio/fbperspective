@@ -116,6 +116,12 @@ var transits = {
         heading : 25,
         pitch : -3,
     },
+    'esplanade' :  {
+        type : 'transit',
+        sphere_id : 'esplanade',
+        heading : -70,
+        pitch : 3,
+    },
 }
 
 // MARK : - SPHERES
@@ -146,7 +152,8 @@ var spheres = {
             articles['chinatown food'],
             comments['food_luccan'],
             comments['food_tami'],
-            comments['food_dawn']
+            comments['food_dawn'],
+            transits['esplanade']
         ]
     },
     'esplanade' : {
@@ -163,23 +170,8 @@ var spheres = {
     }
 };
 
-var route = {
-	'initial_sphere' : 'esplanade',
-	'aerial' : spheres['aerial'],
-	'chinatown' : spheres['chinatown'],
-	'esplanade' : spheres['esplanade']
-};
-
 
 // MARK : - ROUTES
-/*
-var routes = {
-    'singapore' : {
-        'first_sphere' : spheres['aerial']
-    }
-};*/
-
-
 
 
 var thegreenroof = {
@@ -224,7 +216,7 @@ var thegreenroof = {
         },
         {
             'type' : 'transit',
-            'sphere_id' : 'thegreenroof',
+            'sphere_id' : 'chinatown',
             'heading' : -30,
             'pitch' : 20,
         }
@@ -275,6 +267,7 @@ var route = {
     'initial_sphere' : 'nightskyline',
     'nightskyline' : nightskyline,
     'thegreenroof' : thegreenroof,
-    /*'aerial' : spheres['aerial'],
-    'chinatown' : spheres['chinatown']*/
+  	'aerial' : spheres['aerial'],
+	'chinatown' : spheres['chinatown'],
+	'esplanade' : spheres['esplanade']
 };
