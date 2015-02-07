@@ -30,6 +30,15 @@ var videos = {
         heading : 235,
         pitch : 0,
     },
+    'chinatown food' : {
+    	type : 'video',
+    	video_uri : {
+    		src : 'res/videos/low-res/Chinatown.m4v',
+    		type : 'mp4',
+    	},
+    	heading : 235,
+    	pitch : 0,
+    }
 };
 
 var comments = {
@@ -73,18 +82,16 @@ var spheres = {
         panoid : '2UzA7K9llK0AAAQXXzrRsA',
         heading : 0,
         pitch : 0,
-        bgm : 'sounds/food-market.mp3',
+        bgm : 'sounds/food_market.mp3',
         title : 'Chinatown',
         info : [
-            comments['prajogo welcome'],
-            articles['gardens by the bay'],
-            articles['art science museum'],
-            videos['a tiny modernity']
+            videos['chinatown food']
         ]
     },
 };
 
 var route = {
+	'initial_sphere' : 'chinatown',
 	'aerial' : spheres['aerial'],
 	'chinatown' : spheres['chinatown']
 };
