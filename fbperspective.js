@@ -106,7 +106,7 @@ Perspective.prototype.initializePerspective = function(panoid, _heading, _pitch)
 		setStyle(home, {
 			'opacity' : '1',
 		})
-		that.ambientSound.pause();
+		that.resetState();
 		bg_video.play();
 	});
 
@@ -273,7 +273,7 @@ Perspective.prototype.resetState = function() {
 }
 
 Perspective.prototype.stopOngoingActivity = function() {
-	this.ambientSound.pause();
+	if(this.ambientSound != null) this.ambientSound.pause();
 	this.ambientSound = null;
 }
 
