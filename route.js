@@ -18,6 +18,14 @@ var articles = {
         heading : 270,
         pitch : 0
     },
+    'chinatown food' : {
+    	type : 'article',
+    	img : 'res/photos/hokkienmee.jpg',
+    	title : 'Food',
+    	body : "Singaporeans usually eat at hawker centres, and Chinatown hawker centre is one of the best.",
+    	heading : -150,
+    	pitch : 5
+    }
 };
 
 var videos = {
@@ -36,7 +44,7 @@ var videos = {
     		src : 'res/videos/low-res/Chinatown.m4v',
     		type : 'mp4',
     	},
-    	heading : 235,
+    	heading : -100,
     	pitch : 0,
     }
 };
@@ -50,6 +58,30 @@ var comments = {
         heading : 330,
         pitch : 0,
     },
+    'food_tami' : {
+        type : 'person_comment',
+        thumbnail : 'res/photos/th4.jpg',
+        header_photo : 'res/photos/h4.jpg',
+        comment : 'I ate 3 servings of wanton mee here yesterday. Superb.',
+        heading : -130,
+        pitch : 0,
+    },
+    'food_luccan' : {
+        type : 'person_comment',
+        thumbnail : 'res/photos/th5.jpg',
+        header_photo : 'res/photos/h5.jpg',
+        comment : 'Hey bro, I can eat more than you lah.',
+        heading : -128,
+        pitch : 5,
+    },
+    'food_dawn' : {
+        type : 'person_comment',
+        thumbnail : 'res/photos/th6.jpg',
+        header_photo : 'res/photos/h6.jpg',
+        comment : 'I love the xiao long bao here!',
+        heading : -110,
+        pitch : 10,
+    }
 }
 
 var transits = {
@@ -80,12 +112,16 @@ var spheres = {
     },
     'chinatown' : {
         panoid : '2UzA7K9llK0AAAQXXzrRsA',
-        heading : 0,
-        pitch : 0,
+        heading : -160,
+        pitch : -5,
         bgm : 'sounds/food_market.mp3',
         title : 'Chinatown',
         info : [
-            videos['chinatown food']
+            videos['chinatown food'],
+            articles['chinatown food'],
+            comments['food_luccan'],
+            comments['food_tami'],
+            comments['food_dawn']
         ]
     },
 };
