@@ -1,7 +1,7 @@
 var googleStreetViewService = new google.maps.StreetViewService();
 var googleMap = new google.maps.Map(document.createElement('div'), {});
 var googlePlacesService = new google.maps.places.PlacesService(googleMap);
-var bannedResults = {'virtual autoshow' : true};
+var bannedResults = {"virtual autoshow" : true, "M_YByOVTFpoAAAQZUTREIg" : true};
 function tourGenerator(address, routeToBePopulated) {
 	var geocoder = new google.maps.Geocoder();
 	var ctr = 0;
@@ -30,11 +30,11 @@ function tourGenerator(address, routeToBePopulated) {
 	}
 	function callback(result, status) {
 		if(ctr == 4)return;
+		if(bannedResults[result.location.description.trim()]) return;
+		if(bannedResults[result.location.pano.trim()]) return;
 		for(var j = 0; j < panoResults.length; ++j) {
-			if(bannedResults[result.location.description])return;
-			if(result.location.description == panoResults[j].location.description)return;
+			if(result.location.description == panoResults[j].location.description) return;
 		}
-		console.log(result);
 		++ctr;
 		panoResults.push(result);
 		if(ctr == 4) queryCompletedCallback();
