@@ -25,6 +25,14 @@ var articles = {
     	body : "Singaporeans usually eat at hawker centres, and Chinatown hawker centre is one of the best.",
     	heading : -150,
     	pitch : 5
+    },
+    'esplanade' : {
+    	type : 'article',
+    	img : 'res/photos/esplanade.jpg',
+    	title : 'Durian-shaped Theatre',
+    	body : "Esplanade is shaped like a durian. It is the central stage of the nation's artistic performances.",
+    	heading : 52,
+    	pitch : 30
     }
 };
 
@@ -46,6 +54,15 @@ var videos = {
     	},
     	heading : -100,
     	pitch : 0,
+    },
+    'esplanade performance' : {
+    	type : 'video',
+    	video_uri : {
+    		src : 'res/videos/low-res/esplanade.mp4',
+    		type : 'mp4',
+    	},
+    	heading : 0,
+    	pitch : 15,
     }
 };
 
@@ -81,6 +98,14 @@ var comments = {
         comment : 'I love the xiao long bao here!',
         heading : -110,
         pitch : 10,
+    },
+    'faridzuan' : {
+    	type : 'person_comment',
+        thumbnail : 'res/photos/th10.jpg',
+        header_photo : 'res/photos/h10.jpg',
+        comment : 'Faris: Hi all! Wynette and I will be performing at Esplanade concourse tomorrow and Tuesday evening. If yall wanna come and chill with us, feel free to drop by!',
+        heading : 110,
+        pitch : 20,
     }
 }
 
@@ -90,7 +115,7 @@ var transits = {
         sphere_id : 'chinatown',
         heading : 25,
         pitch : -3,
-    }
+    },
 }
 
 // MARK : - SPHERES
@@ -124,12 +149,25 @@ var spheres = {
             comments['food_dawn']
         ]
     },
+    'esplanade' : {
+        panoid : '6_5eOePdoZYAAAAGOvkzOg',
+        heading : 102,
+        pitch : 0,
+        bgm : 'sounds/shopping.mp3',
+        title : 'Esplanade Theatre',
+        info : [
+        	articles['esplanade'],
+        	videos['esplanade performance'],
+        	comments['faridzuan']
+        ]
+    }
 };
 
 var route = {
-	'initial_sphere' : 'chinatown',
+	'initial_sphere' : 'esplanade',
 	'aerial' : spheres['aerial'],
-	'chinatown' : spheres['chinatown']
+	'chinatown' : spheres['chinatown'],
+	'esplanade' : spheres['esplanade']
 };
 
 // MARK : - ROUTES
