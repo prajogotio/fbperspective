@@ -83,7 +83,7 @@
 	var perspectiveManagerDOM;
 	function startPerspectiveTour() {
 		//change
-		perspectiveManager = new PerspectiveManager(route, route['test_sphere']);
+		perspectiveManager = new PerspectiveManager(route, route[route['initial_sphere']]);
 		perspectiveManagerDOM = document.getElementById('perspective-service');
 		setTimeout(function() {
 			setStyle(home, {
