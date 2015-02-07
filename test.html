@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html>
+<style>
+	html, body {
+		height: 100%;
+		margin: 0;
+	}
+</style>
 <head>
 	<link href='http://fonts.googleapis.com/css?family=Exo+2:100' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
@@ -14,8 +20,9 @@
 </body>
 
 <script>
-		//change
+	var perspectiveManager;
+	document.addEventListener('DOMContentLoaded', function() {
 		perspectiveManager = new PerspectiveManager(route, route[route['initial_sphere']]);
-		perspectiveManagerDOM = document.getElementById('perspective-service');
+	})
 </script>
 </html>
