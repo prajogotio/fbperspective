@@ -226,7 +226,7 @@ var thegreenroof = {
 var nightskyline = {
     'title' : 'Singapore Night Sky',
     'panoid' : 'xNSktCgq91QAAAQZL1fx2A',
-    'heading' : 0,
+    'heading' : -30,
     'pitch' : 0,
     'bgm' : 'sounds/city-park.mp3',
     'info' : [
