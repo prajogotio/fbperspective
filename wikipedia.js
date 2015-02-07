@@ -1,6 +1,36 @@
+var perspectiveWikiCallback = function() { };
+
+// MARK : - WIKIPEDIA OPENSEARCH
+function getRelevantWikiTitles(keyword, callback) {
+    perspectiveWikiCallback = callback;
+
+    var baseUrl = "http://en.wikipedia.org/w/api.php";
+    var queryParams = {
+        'format' : 'json',
+        'action' : 'opensearch',
+        'search' : keyword,
+        'limit' : '10',
+        'suggest' : 'true',
+        'format' : 'json',
+        'callback' : 'processTitles'
+    };
+
+    var s = document.createElement('script');
+    s.src = constructUrl(baseUrl, queryParams);
+    document.body.appendChild(s);
+}
+
+function processTitles(data) {
+    var titles = data[1];
+    getWikiArticlesTitled(titles);
+}
+
+
 // Requires : titles must be an array of string, and it must exist on Wikipedia
 // Action : fetches the corresponding articles and return an array of string
 function getWikiArticlesTitled(titles) {
+    console.log(titles);
+
     titles = titles.map(sanitizeSpaces);
     var strTitles = titles.reduce(function(a, b) { return a + '|' + b; });
     
@@ -19,51 +49,31 @@ function getWikiArticlesTitled(titles) {
     
     var s = document.createElement('script');
     s.src = constructUrl(baseUrl, queryParams);
-    document.body.appendChild(s);    
-}
-
-function getRelevantWikiTitles(keyword) {
-    var baseUrl = "http://en.wikipedia.org/w/api.php";
-    var queryParams = {
-        'format' : 'json',
-        'action' : 'opensearch',
-        'search' : keyword,
-        'limit' : '5',
-        'suggest' : 'true',
-        'format' : 'json',
-        'callback' : 'processTitles'
-    };
-
-    var s = document.createElement('script');
-    s.src = constructUrl(baseUrl, queryParams);
     document.body.appendChild(s);
 }
 
-function processTitles(data) {
-    console.log(data);
-    var titles = data[1];
-    getRelevantWikiTitles(titles);
-}
-
-
 function wikipediaCallback(data) {
-    var div = document.getElementById("wiki");
-    
+    var res = [];
+    console.log(data);
     for (var pageId in data.query.pages) {
+        if (pageId < 0) continue;
         var page = data.query.pages[pageId];
+
         var content = page.revisions[0]['*'];
         var parsedContent = txtwiki.parseWikitext(content);
+
         var match = parsedContent.match(/[A-Za-z0-9\s]{100,200}/);
-        if (match.hasOwnProperty(0)) {
-            // TODO: modify this function (PRAJOGO!)
-            div.innerHTML = match[0];
+
+        if (match != null && match.hasOwnProperty(0)) {
+            res.push(match[0]);
         }
     }
 
+    perspectiveWikiCallback(res);
 }
 
 function sanitizeSpaces(str) {
-    return str.trim().replace(/\s+/g, '%20');
+    return str.trim().replace(/\s+/g, ' ');
 }
 
 function constructUrl(baseUrl, params) {

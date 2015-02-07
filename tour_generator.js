@@ -6,6 +6,36 @@ function tourGenerator(address, routeToBePopulated) {
 	var geocoder = new google.maps.Geocoder();
 	var ctr = 0;
 	var panoResults = [];
+	var articleArray = []; //10 articles
+	var articleIterator = 0;
+	function wikiCallback(res) {
+		console.log(res);
+		for (x in res) {
+			articleArray.push(res[x]);
+		}
+
+		geocoder.geocode({'address':address}, function(results, status){
+			var lat = results[0].geometry.location.lat();
+			var lng = results[0].geometry.location.lng();
+			var radius = 50;
+			var latLng = new google.maps.LatLng(lat, lng);
+			var nearByPlacesRequest = {
+				'location' : latLng,
+				'radius' : radius,
+			};
+			googlePlacesService.nearbySearch(nearByPlacesRequest, function(results, status) {
+				for (var i = 0; i < results.length; ++i) {
+					var curLatLng = new google.maps.LatLng(results[i].geometry.location.lat(), results[i].geometry.location.lng());
+					googleStreetViewService.getPanoramaByLocation(curLatLng, radius, callback);
+				}
+			});
+		});
+
+	}
+
+	var articles = getRelevantWikiTitles(address, wikiCallback);
+	
+
 	function queryCompletedCallback() {
 		routeToBePopulated.initial_sphere = 0;
 		var sphere = [];
@@ -23,6 +53,16 @@ function tourGenerator(address, routeToBePopulated) {
 						sphere_id : (i+1) % 4,
 					}
 				],
+			};
+			for(var j=0;j<2;++j){
+				sphere[i].info.push({
+					type : 'article',
+					heading : Math.random() * (j+1) * -30,
+					pitch : Math.random() * 10,
+					img : 'res/photos/bgimg.jpg',
+					title : 'Information',
+					body : articleArray[articleIterator++],
+				});
 			}
 			routeToBePopulated[i] = sphere[i];
 		}
@@ -39,21 +79,6 @@ function tourGenerator(address, routeToBePopulated) {
 		panoResults.push(result);
 		if(ctr == 4) queryCompletedCallback();
 	}
-	geocoder.geocode({'address':address}, function(results, status){
-		var lat = results[0].geometry.location.lat();
-		var lng = results[0].geometry.location.lng();
-		var radius = 50;
-		var latLng = new google.maps.LatLng(lat, lng);
-		var nearByPlacesRequest = {
-			'location' : latLng,
-			'radius' : radius,
-		};
-		googlePlacesService.nearbySearch(nearByPlacesRequest, function(results, status) {
-			for (var i = 0; i < results.length; ++i) {
-				var curLatLng = new google.maps.LatLng(results[i].geometry.location.lat(), results[i].geometry.location.lng());
-				googleStreetViewService.getPanoramaByLocation(curLatLng, radius, callback);
-			}
-		});
-	});
+	
 }
 
