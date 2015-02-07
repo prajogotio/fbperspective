@@ -170,6 +170,7 @@ var route = {
 	'esplanade' : spheres['esplanade']
 };
 
+
 // MARK : - ROUTES
 /*
 var routes = {
@@ -179,3 +180,101 @@ var routes = {
 };*/
 
 
+
+
+var thegreenroof = {
+    panoid : '6YQ9pUy9F94AAAQYNw70KA',
+    heading : -70,
+    pitch : 0,
+    title : 'The Green Roof',
+    bgm : 'sounds/wind-breeze.mp3',
+    info : [
+        {
+            'type' : 'article',
+            'img' : 'res/photos/marina-barrage-airview.jpg',
+            'heading' : -70,
+            'pitch' : 15,
+            'title' : 'The Green What?',
+            'body' : 'Unique to Singapore, the Green Roof is an eco-friendly building located next to Marina Barrage. Here, you can enjoy kite-flying in the open sky!'
+        },
+        {
+            'type' : 'video',
+            'pitch' : -5,
+            'heading' : -99,
+            'video_uri' : {
+                src : 'res/videos/thegreenroof.mp4',
+                type : 'mp4',
+            }
+        },
+        {
+            'type' : 'person_comment',
+            'thumbnail' : 'res/photos/collins_thumbnail.jpg',
+            'header_photo' : 'res/photos/collins_header.jpg',
+            'comment' : "Collins: I love flying kites!",
+            'heading' : -45,
+            'pitch' : -6,
+        },
+        {
+            'type' : 'person_comment',
+            'thumbnail' : 'res/photos/ryan_thumbnail.jpg',
+            'header_photo' : 'res/photos/ryan_header.jpg',
+            'comment' : 'Ryan: But the kites are so expensive! :(',
+            'heading' : -35,
+            'pitch' : -6,
+        },
+        {
+            'type' : 'transit',
+            'sphere_id' : 'thegreenroof',
+            'heading' : -30,
+            'pitch' : 20,
+        }
+    ],
+}
+
+var nightskyline = {
+    'title' : 'Singapore Night Sky',
+    'panoid' : 'xNSktCgq91QAAAQZL1fx2A',
+    'heading' : 0,
+    'pitch' : 0,
+    'bgm' : 'sounds/city-park.mp3',
+    'info' : [
+        {
+            'type' : 'person_comment',
+            'thumbnail' : 'res/photos/andhieka_thumbnail.jpg',
+            'header_photo' : 'res/photos/andhieka_header.jpg',
+            'comment' : 'Andhieka: Singapore is a city that never sleeps!',
+            'heading' : -200,
+            'pitch' : 10,
+        },
+        {
+            'type' : 'person_comment',
+            'thumbnail' : 'res/photos/prajogo_thumbnail.jpg',
+            'header_photo' : 'res/photos/prajogo_header.jpg',
+            'comment' : 'Prajogo: Hackers in Singapore also never sleep!',
+            'heading' : -200,
+            'pitch' : 0,
+        },
+        {
+            'type' : 'article',
+            'title' : 'Marina Bay Sands',
+            'img' : 'res/photos/mbs.jpg',
+            'heading' : -250,
+            'pitch' : 20,
+            'body' : 'Marina Bay Sands might be the only building in the world that has a ship built on top of it. According to Fengshui, this building represents "Hub of Prosperity"',
+        },
+        {
+            'type' : 'transit',
+            'sphere_id' : 'thegreenroof',
+            'heading' : -300,
+            'pitch' : 0,
+        }
+    ],
+}
+
+var route = {
+    'initial_sphere' : 'nightskyline',
+    'nightskyline' : nightskyline,
+    'thegreenroof' : thegreenroof,
+    /*'aerial' : spheres['aerial'],
+    'chinatown' : spheres['chinatown']*/
+};
