@@ -39,7 +39,7 @@ function tourGenerator(address, routeToBePopulated) {
 	function queryCompletedCallback() {
 		routeToBePopulated.initial_sphere = 0;
 		var sphere = [];
-		for(var i =0;i < 4; ++i) {
+		for(var i =0;i < 2; ++i) {
 			sphere[i] = {
 				panoid : panoResults[i].location.pano,
 				heading : 0,
@@ -50,7 +50,7 @@ function tourGenerator(address, routeToBePopulated) {
 						type : 'transit',
 						heading : Math.random() * 20,
 						pitch : Math.random() * 10,
-						sphere_id : (i+1) % 4,
+						sphere_id : (i+1) % 2,
 					}
 				],
 			};
@@ -69,7 +69,7 @@ function tourGenerator(address, routeToBePopulated) {
 		startPerspectiveTour();
 	}
 	function callback(result, status) {
-		if(ctr == 4)return;
+		if(ctr == 2)return;
 		if(bannedResults[result.location.description.trim()]) return;
 		if(bannedResults[result.location.pano.trim()]) return;
 		for(var j = 0; j < panoResults.length; ++j) {
@@ -77,7 +77,7 @@ function tourGenerator(address, routeToBePopulated) {
 		}
 		++ctr;
 		panoResults.push(result);
-		if(ctr == 4) queryCompletedCallback();
+		if(ctr == 2) queryCompletedCallback();
 	}
 	
 }
